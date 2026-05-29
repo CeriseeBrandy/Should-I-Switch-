@@ -1,0 +1,157 @@
+---
+title: Linux for Gaming
+description: An honest look at the state of gaming on Linux — what works well, what doesn't, and what to check before switching.
+---
+
+import { Aside, Card, CardGrid, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Linux for Gaming
+
+Linux gaming has improved dramatically over the last several years, largely due to Valve's investment in **Proton** — a compatibility layer that allows many Windows games to run on Linux without modification.
+
+However, "improved dramatically" does not mean "works for everything." This page gives you an honest picture of where things stand.
+
+---
+
+## The Short Answer
+
+**Linux gaming is viable for many people, but not everyone.**
+
+If you play single-player games or games without kernel-level anti-cheat, your library may be largely compatible. If you play competitive multiplayer titles — particularly those using Riot's Vanguard anti-cheat — you will hit hard blockers.
+
+The only reliable way to know if your library works is to check it.
+
+---
+
+## How Linux Gaming Works
+
+Most games on Linux run through one of these paths:
+
+- **Native Linux builds** — a small number of games ship with a native Linux version. These generally work best.
+- **Proton (Steam)** — Valve's compatibility layer allows many Windows-only games to run on Linux via Steam. It is the primary reason Linux gaming has become practical.
+- **Wine / Lutris** — Wine is the underlying compatibility technology Proton is built on. Lutris is a game manager that uses Wine and other tools to run games from GOG, Epic, and other sources.
+- **Heroic Games Launcher** — an open-source alternative for GOG and Epic Games that integrates with Proton/Wine.
+
+---
+
+## What Works Well
+
+<CardGrid>
+  <Card title="Steam Library (many titles)" icon="approve-check">
+    A large portion of the Steam catalog works on Linux through Proton. Valve maintains a list of "Steam Deck Verified" games — these are tested to work on Linux specifically.
+  </Card>
+
+  <Card title="Single-player and indie games" icon="approve-check">
+    Single-player games and indie titles tend to work well. They typically don't use kernel-level anti-cheat, and many have been tested on the Steam Deck.
+  </Card>
+
+  <Card title="Older titles" icon="approve-check">
+    Many older games that never got Linux ports run well through Wine/Proton. The compatibility layer has matured significantly.
+  </Card>
+
+  <Card title="Emulation" icon="approve-check">
+    Emulation software — Retroarch, RPCS3, Yuzu, Dolphin — is well-supported on Linux and often performs as well or better than on Windows.
+  </Card>
+</CardGrid>
+
+---
+
+## What Doesn't Work or Is Unreliable
+
+<Aside type="danger" title="Check these before switching">
+The following are real blockers for a meaningful number of gamers. Don't assume your game works — verify it.
+</Aside>
+
+### Games with Kernel-Level Anti-Cheat
+
+This is the most significant blocker for Linux gaming.
+
+| Game | Anti-Cheat | Linux Status |
+|---|---|---|
+| Valorant | Riot Vanguard | **Does not work** |
+| League of Legends | Riot Vanguard | **Does not work** |
+| Fortnite | EasyAntiCheat (kernel mode) | **Does not work** |
+| PUBG | BattlEye | Partial — check ProtonDB |
+| Apex Legends | EasyAntiCheat | Works (EAC enabled Proton support) |
+| Rainbow Six Siege | BattlEye | Works (BattlEye enabled Proton support) |
+
+<Aside type="caution">
+Anti-cheat support can change. Always check [ProtonDB](https://www.protondb.com/) and the game's own forums for current status before making a decision.
+</Aside>
+
+---
+
+### Games with Aggressive DRM
+
+Some games use DRM (digital rights management) systems that don't function under Proton. Denuvo is the most common example. Results vary by title — some work, some don't.
+
+---
+
+### Non-Steam PC Game Launchers
+
+- **Battle.net** (Blizzard) — works via Lutris with varying reliability per game
+- **EA App** — mixed results; some EA games work through Proton on Steam, others are unstable
+- **Epic Games** — works via Heroic Games Launcher
+- **Ubisoft Connect** — mixed results through Lutris
+
+---
+
+## NVIDIA vs AMD on Linux
+
+GPU choice matters more on Linux than on Windows.
+
+<Tabs>
+  <TabItem label="AMD GPUs">
+    AMD graphics cards have fully open-source drivers built into the Linux kernel. They require no additional setup, work out of the box on most distributions, and are generally well-supported. AMD is often the recommended choice for Linux gaming.
+  </TabItem>
+
+  <TabItem label="NVIDIA GPUs">
+    NVIDIA GPUs require proprietary drivers. These drivers work and gaming performance is generally good, but:
+
+    - Installation can require extra steps on some distributions
+    - Driver updates occasionally introduce issues
+    - Wayland (the modern Linux display protocol) has had historically rocky support with NVIDIA, though this has improved
+    - Some distributions make NVIDIA setup easier than others (Pop!_OS, for example, ships NVIDIA-specific versions of their ISO)
+  </TabItem>
+
+  <TabItem label="Intel GPUs">
+    Intel integrated graphics work well on Linux for general use and lighter gaming. For demanding titles, performance is limited by the hardware itself rather than driver quality.
+  </TabItem>
+</Tabs>
+
+---
+
+## The Steam Deck Factor
+
+Valve's Steam Deck runs Linux (SteamOS). The existence of the Steam Deck has been a significant driver of compatibility improvements — games that pass Steam Deck verification are tested to work on Linux. The [Steam Deck Verified catalog](https://store.steampowered.com/greatondeck) is a useful reference even if you're not using a Steam Deck.
+
+---
+
+## How to Check Your Library
+
+Before switching, spend 30 minutes doing this:
+
+1. Go to [ProtonDB](https://www.protondb.com/) and look up every game you play regularly
+2. Check the rating: **Platinum / Gold** = generally works well. **Silver** = works with tweaks. **Bronze** = problematic. **Borked** = doesn't work.
+3. For multiplayer games, check the game's own forums or subreddit for current anti-cheat status
+4. Look up "Steam Deck Verified" status on the Steam store page
+
+---
+
+## Verdict
+
+<Card title="Gaming verdict" icon="information">
+Linux is a viable gaming platform if your library is primarily single-player games or multiplayer games without kernel-level anti-cheat. It is not viable if you regularly play Valorant, Fortnite, or other titles that use ring-0 anti-cheat systems that explicitly block Linux.
+
+The only way to know for sure is to check your specific games before switching.
+</Card>
+
+---
+
+## Resources
+
+- [ProtonDB](https://www.protondb.com/) — community compatibility reports for thousands of games
+- [Steam Deck Verified](https://store.steampowered.com/greatondeck) — Valve's officially tested list
+- [Lutris](https://lutris.net/) — game manager for non-Steam titles
+- [Heroic Games Launcher](https://heroicgameslauncher.com/) — Epic and GOG games on Linux
+- [GamingOnLinux](https://www.gamingonlinux.com/) — news and coverage of Linux gaming

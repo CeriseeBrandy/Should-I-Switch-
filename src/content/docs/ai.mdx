@@ -1,0 +1,171 @@
+---
+title: Linux for AI & Machine Learning
+description: Why Linux is the de facto standard for AI and ML work, and what to know before setting up your environment.
+---
+
+import { Aside, Card, CardGrid, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Linux for AI & Machine Learning
+
+If you work with machine learning, deep learning, or AI research tooling, Linux is the environment most of the field is built around. This isn't tribalism — it's a practical reality of how the tooling, hardware drivers, and cloud infrastructure are developed and deployed.
+
+---
+
+## The Short Answer
+
+**Linux is the strongest platform for AI and ML work.** Most frameworks are developed and tested on Linux first. CUDA driver management, Docker-based environments, and cloud compute instances all work best on Linux.
+
+macOS is viable for development and CPU-based work. Windows works but often requires extra steps. Linux is where the fewest obstacles exist.
+
+---
+
+## Why Linux for AI/ML
+
+### CUDA and GPU Drivers
+
+NVIDIA's CUDA toolkit — essential for GPU-accelerated deep learning with PyTorch, TensorFlow, and JAX — has its most mature support on Linux. Driver installation, CUDA version management, and multi-GPU setups are all more reliable on Linux.
+
+<Aside type="caution">
+NVIDIA driver setup on Linux is manageable but requires attention. If you're on an NVIDIA GPU, research driver installation for your chosen distribution before committing. Distributions like Pop!_OS ship NVIDIA-specific ISOs that simplify this.
+</Aside>
+
+### Docker and Containerized Environments
+
+ML environments are often managed with Docker to handle dependency conflicts between projects. Docker runs natively on Linux without a virtual machine layer, which means:
+
+- Faster container startup and lower overhead
+- No Docker Desktop licensing considerations (relevant for some enterprise users)
+- Native GPU passthrough with `nvidia-container-toolkit`
+
+### Environment Management
+
+Tools like `conda`, `mamba`, `venv`, `pyenv`, and `poetry` all work on Linux without the path or permission issues that occasionally affect them on Windows.
+
+### Cloud Parity
+
+When you move to cloud compute (AWS EC2, Google Cloud, Lambda Labs, RunPod), those instances run Linux. Developing locally on Linux means your environment, scripts, and Docker images behave the same way in the cloud as they do on your machine.
+
+---
+
+## What Works Well
+
+<CardGrid>
+  <Card title="PyTorch" icon="approve-check">
+    PyTorch is developed with Linux as the primary target. CUDA, MPS (Apple Silicon), and CPU builds are all available, but Linux CUDA support is most mature.
+  </Card>
+
+  <Card title="TensorFlow / JAX" icon="approve-check">
+    Both frameworks work well on Linux. JAX in particular has the smoothest XLA compilation support on Linux.
+  </Card>
+
+  <Card title="Jupyter / JupyterLab" icon="approve-check">
+    Runs natively. Most users run Jupyter in a browser, which makes OS differences minimal, but installation and kernel management are cleaner on Linux.
+  </Card>
+
+  <Card title="Hugging Face Transformers" icon="approve-check">
+    The Hugging Face ecosystem (Transformers, Datasets, Diffusers, Accelerate) is developed and tested on Linux. Works on other platforms but Linux is the primary target.
+  </Card>
+
+  <Card title="Local LLM Inference" icon="approve-check">
+    Tools like Ollama, llama.cpp, LM Studio, and vLLM are all well-supported on Linux. GPU acceleration for local inference works most reliably on Linux with NVIDIA GPUs.
+  </Card>
+
+  <Card title="Docker-based ML stacks" icon="approve-check">
+    The NVIDIA Container Toolkit enables GPU access inside Docker containers on Linux. This is the standard approach for reproducible ML environments.
+  </Card>
+</CardGrid>
+
+---
+
+## AMD vs NVIDIA GPUs for ML on Linux
+
+<Tabs>
+  <TabItem label="NVIDIA (CUDA)">
+    NVIDIA GPUs with CUDA are the industry standard for ML training and inference. CUDA is deeply integrated into PyTorch, TensorFlow, and most other frameworks.
+
+    On Linux, CUDA driver management is straightforward once you understand the relationship between the driver version, CUDA toolkit version, and framework requirements. Tools like `nvidia-smi` and `nvtop` work natively.
+
+    **Best choice for ML workloads.**
+  </TabItem>
+
+  <TabItem label="AMD (ROCm)">
+    AMD has ROCm, its GPU computing platform for ML workloads. PyTorch and TensorFlow support ROCm, but support is less mature than CUDA, and not all GPUs in AMD's lineup are fully supported.
+
+    ROCm is Linux-only — there is no ROCm support for Windows or macOS. If you're using an AMD GPU for ML, Linux is required.
+
+    **Viable but verify your specific GPU is supported by ROCm.**
+  </TabItem>
+
+  <TabItem label="Apple Silicon (macOS)">
+    Apple Silicon (M1/M2/M3) has MPS (Metal Performance Shaders) acceleration for PyTorch and TensorFlow. For many workloads it performs well and the unified memory architecture is useful for large models.
+
+    This is not a Linux-specific option, but worth mentioning: if you're on Apple Silicon, macOS has strong ML support and Linux in a VM won't give you GPU access.
+  </TabItem>
+</Tabs>
+
+---
+
+## Common Setup Patterns
+
+### Conda Environment (typical)
+
+```bash
+# Install Miniconda, then:
+conda create -n ml-env python=3.11
+conda activate ml-env
+conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+```
+
+### Docker with GPU Access
+
+```bash
+# After installing nvidia-container-toolkit:
+docker run --gpus all nvidia/cuda:12.1.0-base-ubuntu22.04 nvidia-smi
+```
+
+### Running Local LLMs with Ollama
+
+```bash
+curl -fsSL https://ollama.ai/install.sh | sh
+ollama run llama3
+```
+
+---
+
+## Pain Points
+
+<Aside type="caution" title="Real friction areas">
+- **CUDA version management** — PyTorch, TensorFlow, and the NVIDIA driver all have version dependencies. Mismatches are a common source of environment issues. Use `conda` or `docker` to isolate environments.
+- **ROCm GPU coverage** — not every AMD GPU is supported. Check the [ROCm supported hardware list](https://rocm.docs.amd.com/en/latest/compatibility/compatibility-matrix.html) before assuming your card works.
+- **Wayland and NVIDIA** — if you're using a desktop environment, Wayland + NVIDIA had historically rough support, though this has improved significantly. X11 remains more compatible with NVIDIA on some distributions.
+</Aside>
+
+---
+
+## Alternatives: Can You Do ML on Windows or macOS?
+
+**Windows:** Works, but Docker GPU integration is more complex, WSL2 with GPU passthrough is possible but adds layers of configuration, and some tools have less community support for Windows-specific issues.
+
+**macOS (Intel):** Limited GPU acceleration. Fine for learning and CPU-based experimentation, not suited for serious training workloads.
+
+**macOS (Apple Silicon):** Good option for development and inference. MPS acceleration is real and growing. Not ideal for large-scale training or CUDA-dependent workflows, but viable for many practitioners.
+
+---
+
+## Verdict
+
+<Card title="AI/ML verdict" icon="information">
+Linux is the strongest platform for AI and ML work. The tooling, GPU support, containerization, and cloud parity all point in the same direction. If you're building GPU-accelerated workflows or deploying models to cloud infrastructure, Linux removes friction that other platforms add.
+
+The main alternatives worth considering are macOS on Apple Silicon (for inference and development) and Windows with WSL2 (if you need to stay on Windows for other reasons).
+</Card>
+
+---
+
+## Resources
+
+- [PyTorch Getting Started](https://pytorch.org/get-started/locally/) — includes Linux CUDA installation instructions
+- [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html) — GPU access in Docker on Linux
+- [ROCm Documentation](https://rocm.docs.amd.com/) — AMD GPU compute platform
+- [fast.ai](https://www.fast.ai/) — practical deep learning course, Linux-friendly setup instructions included
+- [Ollama](https://ollama.ai/) — run LLMs locally on Linux

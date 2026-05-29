@@ -1,0 +1,180 @@
+---
+title: Before You Switch
+description: An honest look at when switching to Linux is not the right choice — and what your alternatives might be.
+---
+
+import { Aside, Card, CardGrid, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Before You Switch
+
+This is the most important page on this site.
+
+Most Linux documentation focuses on how to switch. This page focuses on whether you should — and more specifically, on the situations where the honest answer is **probably not yet**, or **not without a plan**.
+
+Read this before doing anything to your system.
+
+---
+
+## The Core Question
+
+Before switching, ask yourself this:
+
+> *"Do I rely on any software, hardware, or workflow that I haven't confirmed works on Linux?"*
+
+If the answer is yes, stop and verify first. This page will help you do that.
+
+---
+
+## When Linux Is Not Recommended
+
+<Aside type="danger" title="Do not switch if any of these apply to you without doing more research first">
+The situations below are genuine blockers for many users. They are not rare edge cases.
+</Aside>
+
+### You use Adobe Creative Suite
+
+Photoshop, Illustrator, Premiere, After Effects, InDesign — none of these run natively on Linux. There are open-source alternatives (GIMP, Inkscape, Kdenlive, Darktable), but they are different applications with different workflows, different file format behavior, and different feature sets.
+
+If your work or study depends on Adobe software, switching to Linux means either:
+- Running Windows in a virtual machine (with performance overhead)
+- Learning new applications from scratch
+- Using Adobe's web apps where available (limited feature set)
+
+This is a significant real-world cost. Don't underestimate it.
+
+---
+
+### You play games with kernel-level anti-cheat
+
+Games using **BattlEye** or **Easy Anti-Cheat** have varying Linux support. Some games using these systems work fine via Proton; others have explicitly blocked Linux. Games using **Riot Vanguard** (Valorant, League of Legends) do not work on Linux at all as of this writing.
+
+Before switching, check [ProtonDB](https://www.protondb.com/) and the game's own support page for every competitive multiplayer game you play regularly.
+
+---
+
+### You develop iOS or macOS apps
+
+Xcode does not run on Linux. There is no supported way to build, test, or submit iOS or macOS applications from Linux. If mobile development includes Apple platforms, you need a Mac.
+
+---
+
+### Your hardware has poor Linux driver support
+
+Some hardware is poorly supported on Linux:
+
+- **Certain Wi-Fi chipsets** — particularly some Realtek and Broadcom chips — require manual driver installation that can be difficult without an internet connection
+- **NVIDIA GPUs** — work on Linux but require proprietary drivers; the open-source Nouveau driver has significantly lower performance. The setup is manageable but not always smooth
+- **Fingerprint readers, IR cameras** — support varies widely by manufacturer; many work, some don't
+- **Some printers and scanners** — particularly older or budget models
+
+Before switching, search for your specific hardware model + "Linux support" to get a realistic picture.
+
+---
+
+### You use Microsoft Office heavily
+
+LibreOffice is a capable office suite, but it is not Microsoft Office. Complex Word documents, Excel files with macros, or PowerPoint files with advanced formatting frequently don't translate perfectly. If your work involves heavy collaboration on Office documents, expect friction.
+
+Microsoft 365 web apps work in a Linux browser, but lack some features of the desktop apps.
+
+---
+
+### You're on a work-managed machine
+
+If your employer manages your laptop, you almost certainly cannot install Linux on it, and attempting to do so may violate your company's IT policy. Check before doing anything.
+
+---
+
+### You have a specific device with known issues
+
+Some laptops and hardware combinations have known Linux compatibility problems. Notable examples include some models from Microsoft Surface, certain Lenovo ThinkPads with specific configurations, and some newer AMD/Intel hybrid graphics setups.
+
+Always search for your specific model before switching.
+
+---
+
+## When Linux Is Probably Fine
+
+<CardGrid>
+  <Card title="Basic daily use" icon="approve-check">
+    Web browsing, email, document writing, video calls — all of this works well on Linux. Firefox, Chrome, Thunderbird, LibreOffice, Zoom, and Slack all have Linux versions.
+  </Card>
+
+  <Card title="Development work" icon="approve-check">
+    Web development, backend development, open-source tooling, Python, Node.js, Rust, Go — Linux is an excellent environment for most development work.
+  </Card>
+
+  <Card title="Server and infrastructure" icon="approve-check">
+    Linux is the dominant server OS for good reason. If this is your context, Linux is almost certainly the right choice.
+  </Card>
+
+  <Card title="AI and machine learning" icon="approve-check">
+    Most ML tooling is developed with Linux first. CUDA, Docker, and major frameworks all behave better on Linux.
+  </Card>
+</CardGrid>
+
+---
+
+## Alternatives to a Full Switch
+
+If you're not sure, you don't have to choose between "all in" and "not at all."
+
+<Tabs>
+  <TabItem label="Dual Boot">
+    Install Linux alongside Windows or macOS. Choose which OS to boot at startup. This lets you try Linux for your actual workflow without giving up your current setup.
+
+    **Upside:** Full native performance on both systems. No commitment.
+
+    **Downside:** Requires disk partitioning (some risk). Switching between systems requires a reboot. You may find yourself just booting Windows every time.
+  </TabItem>
+
+  <TabItem label="Virtual Machine">
+    Run Linux inside a virtual machine on Windows or macOS using software like VirtualBox or VMware.
+
+    **Upside:** Completely safe. Easy to remove. Good for learning Linux concepts.
+
+    **Downside:** Reduced performance. Not suitable for gaming or GPU-intensive work. Doesn't give you a real sense of daily use.
+  </TabItem>
+
+  <TabItem label="Live USB">
+    Boot Linux from a USB drive without installing it. Test it on your actual hardware.
+
+    **Upside:** No risk, no installation required. Tests real hardware compatibility.
+
+    **Downside:** Slower than a real installation. Doesn't persist changes between sessions (by default). Not a real test of daily use.
+  </TabItem>
+
+  <TabItem label="WSL (Windows)">
+    Windows Subsystem for Linux runs a Linux environment inside Windows without a separate installation.
+
+    **Upside:** Excellent for developers who want Linux tooling without leaving Windows. Integrates well with VS Code.
+
+    **Downside:** Not a full Linux desktop. No graphical Linux apps by default (though WSLg adds limited support). Not a substitute for a full switch.
+  </TabItem>
+</Tabs>
+
+---
+
+## Making the Decision
+
+<Aside type="tip" title="A practical checklist">
+Before switching, work through the following:
+
+- [ ] List every piece of software you use regularly
+- [ ] Verify each one has a Linux version, a working equivalent, or a workaround you're comfortable with
+- [ ] Search your specific hardware model for Linux compatibility reports
+- [ ] Check ProtonDB for every game you play competitively
+- [ ] Boot a live USB of your target distribution and test your Wi-Fi, display, and peripherals
+- [ ] Decide whether dual boot is a safer first step
+</Aside>
+
+If you've worked through that list and the picture looks good, the rest of this site will help you choose a distribution and get started. If red flags appeared, now you know what to investigate further.
+
+---
+
+## Resources
+
+- [ProtonDB](https://www.protondb.com/) — community reports on Linux game compatibility
+- [Linux Hardware Database](https://linux-hardware.org/) — community-tested hardware compatibility reports
+- [DistroWatch](https://distrowatch.com/) — distribution news and comparisons
+- [r/linux4noobs](https://www.reddit.com/r/linux4noobs/) — a beginner community where you can ask questions before committing

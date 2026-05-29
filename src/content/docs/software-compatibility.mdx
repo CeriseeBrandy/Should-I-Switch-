@@ -1,0 +1,224 @@
+---
+title: Software Compatibility
+description: A practical reference for common software categories — what has Linux versions, what has equivalents, and where the gaps are.
+---
+
+import { Aside, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Software Compatibility
+
+Before switching to Linux, make a list of every piece of software you use regularly. Then check it against this page.
+
+This is one of the most important steps in deciding whether to switch. "I can find alternatives" is sometimes true and fine — and sometimes means months of workflow disruption. Knowing the difference matters.
+
+---
+
+## How to Read This Page
+
+Each section covers a software category and its Linux situation:
+
+- ✅ **Works natively** — official Linux version exists
+- ⚠️ **Partial / alternatives exist** — no direct port, but usable replacements or workarounds
+- ❌ **No viable option** — significant gap, no satisfactory workaround for most users
+
+---
+
+## Web Browsers
+
+✅ **Full support.**
+
+Firefox, Chromium, and Google Chrome all have official Linux builds. Brave, Vivaldi, and Opera also support Linux. Microsoft Edge has a Linux build.
+
+---
+
+## Communication and Collaboration
+
+✅ Most major tools work.
+
+| App | Linux Status |
+|---|---|
+| Slack | ✅ Official native app |
+| Discord | ✅ Official native app |
+| Zoom | ✅ Official native app |
+| Microsoft Teams | ⚠️ Official app exists but lags behind Windows/macOS version |
+| Signal | ✅ Official native app |
+| Telegram | ✅ Official native app |
+| WhatsApp | ❌ No desktop client for Linux (web app works in browser) |
+
+---
+
+## Office and Productivity
+
+<Aside type="caution">
+If your work involves heavy collaboration on Microsoft Office documents — particularly complex Word documents, Excel files with macros, or PowerPoint with advanced formatting — expect some friction. File format compatibility between LibreOffice and Microsoft Office is good but not perfect.
+</Aside>
+
+| App | Linux Status |
+|---|---|
+| Microsoft Word | ❌ No native client — web version works in browser |
+| Microsoft Excel | ❌ No native client — web version works in browser |
+| Microsoft PowerPoint | ❌ No native client — web version works in browser |
+| LibreOffice Writer | ✅ Full native — Word-compatible formats |
+| LibreOffice Calc | ✅ Full native — Excel-compatible formats |
+| LibreOffice Impress | ✅ Full native — PowerPoint-compatible formats |
+| Google Docs / Sheets / Slides | ✅ Web-based, works in any browser |
+| Notion | ⚠️ No native app; web version works fully |
+| Obsidian | ✅ Official native app |
+
+---
+
+## Creative Tools
+
+<Aside type="danger" title="Adobe users: read this carefully">
+Adobe's desktop applications — Photoshop, Illustrator, Premiere, After Effects, InDesign, Lightroom — have no native Linux versions. The open-source alternatives are real applications, but they are different tools with different workflows. Do not assume a direct replacement.
+</Aside>
+
+<Tabs>
+  <TabItem label="Image Editing">
+
+    | App | Linux Status |
+    |---|---|
+    | Adobe Photoshop | ❌ No native version. Runs in some Wine setups but unreliably. |
+    | GIMP | ✅ Full native — capable photo and image editor with a different workflow |
+    | Krita | ✅ Full native — strong digital painting and illustration tool |
+    | Darktable | ✅ Full native — non-destructive raw photo editing (similar to Lightroom) |
+    | RawTherapee | ✅ Full native — alternative raw photo editor |
+
+  </TabItem>
+  <TabItem label="Vector & Illustration">
+
+    | App | Linux Status |
+    |---|---|
+    | Adobe Illustrator | ❌ No native version |
+    | Inkscape | ✅ Full native — SVG-based vector editor |
+    | Affinity Designer | ❌ No Linux version |
+
+  </TabItem>
+  <TabItem label="Video Editing">
+
+    | App | Linux Status |
+    |---|---|
+    | Adobe Premiere | ❌ No native version |
+    | Final Cut Pro | ❌ macOS-only |
+    | DaVinci Resolve | ✅ Official native Linux version — professional-grade |
+    | Kdenlive | ✅ Full native — capable open-source editor |
+    | OpenShot | ✅ Full native — simpler, beginner-friendly |
+
+  </TabItem>
+  <TabItem label="Audio Production">
+
+    | App | Linux Status |
+    |---|---|
+    | Ableton Live | ❌ No native version — no reliable Wine workaround |
+    | FL Studio | ⚠️ Windows version runs under Wine with significant effort; not recommended |
+    | Reaper | ✅ Official Linux version (beta but widely used) |
+    | Ardour | ✅ Full native — professional open-source DAW |
+    | LMMS | ✅ Full native — more limited, but beginner-friendly |
+
+    <Aside type="caution">
+    Audio production on Linux has historically required knowledge of JACK audio configuration and ALSA/PulseAudio (now PipeWire). This has improved significantly with PipeWire, but Linux audio can still require more setup than on macOS or Windows.
+    </Aside>
+
+  </TabItem>
+  <TabItem label="3D / Motion">
+
+    | App | Linux Status |
+    |---|---|
+    | Adobe After Effects | ❌ No native version |
+    | Blender | ✅ Full native — professional-grade 3D and compositing |
+    | Natron | ✅ Full native — open-source compositing (After Effects alternative) |
+
+  </TabItem>
+</Tabs>
+
+---
+
+## Development Tools
+
+✅ Generally well-supported.
+
+| App | Linux Status |
+|---|---|
+| VS Code | ✅ Official native app |
+| JetBrains IDEs | ✅ All have official Linux builds |
+| Git | ✅ Native — Linux is where Git was created |
+| Docker | ✅ Full native support |
+| Postman | ✅ Official native app |
+| Insomnia | ✅ Official native app |
+| Visual Studio (full) | ❌ Windows-only |
+
+---
+
+## Games and Gaming Platforms
+
+| App | Linux Status |
+|---|---|
+| Steam | ✅ Official native client + Proton compatibility layer |
+| Heroic Games Launcher | ✅ Native — for Epic and GOG games |
+| Lutris | ✅ Native — game manager for various sources |
+| Battle.net | ⚠️ Works via Lutris; reliability varies by game |
+| EA App | ⚠️ Some games work via Proton; others don't |
+
+See the [Gaming](/gaming/) page for a full breakdown.
+
+---
+
+## Security and Privacy
+
+✅ Generally strong.
+
+| App | Linux Status |
+|---|---|
+| Bitwarden | ✅ Official native app |
+| 1Password | ✅ Official native app |
+| KeePassXC | ✅ Full native |
+| ProtonVPN | ✅ Official native app |
+| Mullvad VPN | ✅ Official native app |
+| Tailscale | ✅ Full native support |
+
+---
+
+## VPN Clients (Corporate)
+
+<Aside type="caution">
+Corporate VPN clients are a common compatibility issue. Many enterprise VPN clients — including some Cisco AnyConnect configurations and some Palo Alto GlobalProtect deployments — have limited or no Linux support.
+
+Check with your IT department before switching a work machine.
+</Aside>
+
+| App | Linux Status |
+|---|---|
+| OpenVPN | ✅ Native |
+| WireGuard | ✅ Native (built into Linux kernel) |
+| Cisco AnyConnect | ⚠️ Official client exists but has limitations on some distributions |
+| GlobalProtect (Palo Alto) | ⚠️ Linux client available but may not support all organizational configurations |
+
+---
+
+## Virtualization
+
+✅ Very well-supported.
+
+| App | Linux Status |
+|---|---|
+| VirtualBox | ✅ Official native |
+| QEMU / KVM | ✅ Native — Linux-native hypervisor, excellent performance |
+| Virt-Manager | ✅ Native GUI for KVM |
+| VMware Workstation | ✅ Official native version |
+
+---
+
+## How to Verify Your Specific Software
+
+1. Search for the software name + "Linux" to find official documentation or download pages
+2. Check [AlternativeTo](https://alternativeto.net/) — filter by "Linux" platform — for alternatives
+3. Search the software name on [WineHQ AppDB](https://appdb.winehq.org/) to see if it runs under Wine
+4. Ask on [r/linux4noobs](https://www.reddit.com/r/linux4noobs/) with your specific use case
+
+---
+
+## Resources
+
+- [AlternativeTo](https://alternativeto.net/) — find alternatives to any software, filterable by platform
+- [WineHQ AppDB](https://appdb.winehq.org/) — compatibility reports for Windows software running under Wine
+- [r/linux4noobs](https://www.reddit.com/r/linux4noobs/) — good community for software compatibility questions

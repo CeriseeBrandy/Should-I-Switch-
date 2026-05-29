@@ -1,0 +1,168 @@
+---
+title: Linux for Servers
+description: Why Linux dominates server infrastructure, and what to know before deploying it in production.
+---
+
+import { Aside, Card, CardGrid, Tabs, TabItem } from '@astrojs/starlight/components';
+
+# Linux for Servers
+
+If there is one domain where the case for Linux is nearly unambiguous, it's servers. Linux runs the overwhelming majority of the world's web infrastructure, cloud platforms, containers, and database systems — and has done so for decades.
+
+This page explains why, and what you need to know if you're getting started with Linux in a server context.
+
+---
+
+## The Short Answer
+
+**Linux is almost always the right choice for server workloads.**
+
+The ecosystem, tooling, community knowledge, and long-term support options are all built around Linux. Windows Server exists and has real use cases, but for new infrastructure work — especially web services, containers, and cloud deployments — Linux is the default choice of the industry.
+
+---
+
+## Why Linux Dominates Servers
+
+<CardGrid>
+  <Card title="Stability and uptime" icon="approve-check">
+    Linux servers routinely run for months or years without requiring a reboot. Updates can often be applied without downtime. This matters for production systems.
+  </Card>
+
+  <Card title="Resource efficiency" icon="approve-check">
+    Linux can run a full server environment with minimal RAM and CPU overhead. This matters at scale, and it matters on small VPS instances where you pay by resource.
+  </Card>
+
+  <Card title="Security model" icon="approve-check">
+    Linux has a mature, granular permissions model. Tools like SELinux, AppArmor, `iptables`/`nftables`, and `fail2ban` give administrators fine-grained control over system security.
+  </Card>
+
+  <Card title="Ecosystem" icon="approve-check">
+    Virtually every major server technology — Nginx, PostgreSQL, Redis, Kafka, Kubernetes, Docker, Prometheus — is developed and tested on Linux first. Support for other platforms is secondary.
+  </Card>
+</CardGrid>
+
+---
+
+## Major Server Distributions
+
+Not all Linux distributions are suited for servers. The following are commonly used in production:
+
+<Tabs>
+  <TabItem label="Ubuntu Server / LTS">
+    Ubuntu LTS (Long Term Support) releases are among the most widely deployed server distributions. They have broad cloud image support, excellent documentation, a large community, and 5-year support windows (with extended security maintenance available).
+
+    Good choice for: general web servers, cloud VMs, beginners to Linux server administration.
+  </TabItem>
+
+  <TabItem label="Debian">
+    Debian is known for exceptional stability. It moves slower than Ubuntu (which is based on Debian), meaning packages are well-tested before release. Many experienced administrators prefer Debian for systems they want to leave running with minimal intervention.
+
+    Good choice for: stable long-running servers, people who prefer minimal default installs.
+  </TabItem>
+
+  <TabItem label="Rocky Linux / AlmaLinux">
+    These are community-maintained rebuilds of RHEL (Red Hat Enterprise Linux), which is the dominant Linux in enterprise environments. Using Rocky or AlmaLinux gives you a RHEL-compatible environment without the licensing cost.
+
+    Good choice for: enterprise environments, organizations that standardize on RHEL tooling, long-term stability requirements.
+  </TabItem>
+
+  <TabItem label="RHEL / CentOS Stream">
+    Red Hat Enterprise Linux is the most widely used Linux in enterprise server environments. It has commercial support, long support lifecycles, and extensive certification for enterprise software. CentOS Stream is the upstream development branch.
+
+    Good choice for: organizations with existing Red Hat relationships, compliance-heavy environments.
+  </TabItem>
+
+  <TabItem label="Alpine Linux">
+    Alpine is a minimal Linux distribution widely used in Docker containers due to its very small image size. It uses musl libc instead of glibc, which can cause compatibility issues with some software.
+
+    Good choice for: container base images, environments where minimal footprint is critical.
+  </TabItem>
+</Tabs>
+
+---
+
+## Key Concepts for Server Linux
+
+<Aside type="tip" title="New to Linux server administration?">
+These are the concepts you'll encounter early. Understanding them reduces confusion significantly.
+</Aside>
+
+### Package Management
+
+Server distributions use package managers to install and update software:
+
+- `apt` / `apt-get` — Debian, Ubuntu
+- `dnf` / `yum` — RHEL, Fedora, Rocky, AlmaLinux
+- `apk` — Alpine
+
+Package managers handle dependencies automatically and make system updates straightforward.
+
+### systemd
+
+Most modern Linux distributions use `systemd` to manage services (background processes). You'll use it constantly:
+
+```bash
+systemctl start nginx       # start a service
+systemctl enable nginx      # start at boot
+systemctl status nginx      # check its status
+journalctl -u nginx         # view logs
+```
+
+### Firewall
+
+Linux firewalls are managed with `ufw` (simpler, Ubuntu-focused), `firewalld` (RHEL/Fedora), or `iptables`/`nftables` directly. On cloud platforms, security groups often provide the primary network-level protection.
+
+### SSH
+
+You will manage Linux servers almost entirely via SSH. Securing your SSH configuration — disabling password authentication, using key-based auth, changing the default port — is one of the first things to do on any new server.
+
+---
+
+## Cloud Platforms
+
+All major cloud providers — AWS, Google Cloud, Azure, DigitalOcean, Hetzner, Linode/Akamai — offer Linux server instances. Linux is the default OS for virtual machines on all of them.
+
+Managed services like Kubernetes (EKS, GKE, AKS) also run Linux nodes underneath their managed control planes.
+
+---
+
+## When You Might Still Need Windows Server
+
+<Aside type="caution">
+There are real scenarios where Windows Server makes sense:
+
+- Running **Active Directory** domain controllers
+- Applications that require **IIS** (Internet Information Services) and can't be migrated
+- Legacy .NET Framework applications with Windows dependencies
+- Organizations standardized on Microsoft stack with existing licensing and support agreements
+
+If you're inheriting existing Windows Server infrastructure, evaluate migration costs honestly rather than switching for ideological reasons.
+</Aside>
+
+---
+
+## Getting Started
+
+If you're new to Linux server administration, a practical path is:
+
+1. Spin up a small VPS on a cloud provider (DigitalOcean, Linode, Hetzner are beginner-friendly and affordable)
+2. Start with Ubuntu Server LTS — it has the most beginner documentation
+3. Learn SSH, `apt`, `systemctl`, and basic `nginx` or `caddy` configuration
+4. Practice on a non-production instance before touching anything important
+
+---
+
+## Verdict
+
+<Card title="Servers verdict" icon="information">
+Linux is the right choice for server infrastructure in almost all new deployments. The tooling, ecosystem, and community knowledge are built around it. The main exceptions are environments with specific Windows Server dependencies or existing Microsoft infrastructure that would be expensive to migrate.
+</Card>
+
+---
+
+## Resources
+
+- [The Linux Command Line (free book)](https://linuxcommand.org/tlcl.php) — a thorough introduction to the Linux terminal
+- [DigitalOcean Tutorials](https://www.digitalocean.com/community/tutorials) — some of the best beginner Linux server tutorials available
+- [Arch Wiki (Linux reference)](https://wiki.archlinux.org/) — comprehensive Linux reference, useful even on non-Arch distributions
+- [linuxserver.io](https://www.linuxserver.io/) — community maintaining Docker images for many self-hosted applications

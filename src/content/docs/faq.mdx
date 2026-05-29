@@ -1,0 +1,185 @@
+---
+title: Frequently Asked Questions
+description: Honest answers to the most common questions about switching to Linux.
+---
+
+import { Aside } from '@astrojs/starlight/components';
+
+# Frequently Asked Questions
+
+---
+
+## General Questions
+
+### Is Linux free?
+
+Most Linux distributions are free to download, install, and use. Some enterprise-focused distributions (like Red Hat Enterprise Linux) have paid support subscriptions, but free community alternatives like Rocky Linux or AlmaLinux are binary-compatible replacements.
+
+"Free" in Linux contexts also refers to freedom — the freedom to inspect, modify, and redistribute the software. This is a philosophical distinction that matters to some users and not to others.
+
+---
+
+### Is Linux difficult to use?
+
+It depends on what you're doing and which distribution you choose.
+
+A modern desktop Linux distribution like Linux Mint or Ubuntu, used for everyday tasks — web browsing, email, documents, video calls — is not significantly harder to use than Windows or macOS. Many people switch and find the day-to-day experience unremarkable in the best sense.
+
+Linux becomes more demanding when you need to troubleshoot hardware issues, configure advanced software, or do things that require the terminal. How often you encounter those situations depends on your hardware and use case.
+
+---
+
+### Do I need to use the terminal?
+
+For typical daily use on a modern distribution: rarely.
+
+For development work, server administration, or troubleshooting: yes, regularly. The terminal is where Linux is most powerful, and learning it is worthwhile.
+
+If the idea of occasionally using a terminal is a firm dealbreaker, Linux will cause frustration. If you're neutral or curious about it, you'll find it becomes natural over time.
+
+---
+
+### Will Linux run faster than Windows on my hardware?
+
+Often, yes — particularly on older hardware. Linux generally uses fewer system resources at idle and requires less background processing than modern Windows.
+
+Results vary by hardware, distribution, and desktop environment. It's not guaranteed, but many users report a noticeable performance improvement when switching, especially on machines more than a few years old.
+
+---
+
+### Can I switch back to Windows if I don't like Linux?
+
+Yes, always. If you install Linux on a separate partition (dual boot) or on a separate drive, your Windows installation is unaffected. If you replace Windows entirely, you can reinstall Windows using a recovery USB — Microsoft provides this for free.
+
+The only irreversible action is formatting your drive without a backup. Back up your data before making any changes.
+
+---
+
+## Hardware Questions
+
+### Will my hardware work with Linux?
+
+Most common hardware works well. Modern desktop and laptop hardware from major manufacturers generally has good Linux driver support.
+
+Hardware categories that sometimes require extra attention:
+- Some Wi-Fi chipsets (particularly Realtek and Broadcom)
+- NVIDIA GPUs (require proprietary drivers — manageable but not automatic on all distributions)
+- Some newer laptops with unusual power management requirements
+- Some fingerprint readers and IR cameras
+
+The most reliable way to check is to search your specific model + "Linux" and to boot a live USB of your target distribution before installing.
+
+---
+
+### My laptop is from [brand] — will it work?
+
+It depends on the specific model more than the brand. Dell (particularly XPS and Developer Edition), Lenovo ThinkPad, HP, and ASUS all have models with well-documented Linux compatibility. Some models from the same manufacturer work great while others have issues.
+
+Search your exact model number + "Linux" before assuming anything.
+
+---
+
+### I have an NVIDIA GPU. Will it work?
+
+Yes, but it requires installing proprietary drivers. The experience varies by distribution:
+
+- **Pop!_OS** ships NVIDIA-specific ISO images that include the drivers out of the box
+- **Ubuntu** makes NVIDIA driver installation straightforward through its additional drivers tool
+- **Fedora** requires a few extra steps to enable the RPM Fusion repository and install drivers
+
+Once drivers are installed, NVIDIA GPUs work well for both display and compute workloads. The open-source Nouveau driver is not suitable for gaming or ML — use the proprietary drivers.
+
+---
+
+### Does Linux support my printer?
+
+Common printers from HP, Brother, Canon, and Epson generally work on Linux. HP has HPLIP, an open-source driver package that supports a large range of their printers.
+
+Older or budget printers sometimes have no Linux drivers. Before buying a new printer if you're switching to Linux, check that the model you're considering has Linux support.
+
+---
+
+## Software Questions
+
+### Can I run Windows software on Linux?
+
+Sometimes. Wine is a compatibility layer that allows some Windows applications to run on Linux. Results vary significantly by application:
+
+- Some applications work well or even perfectly under Wine
+- Some applications work with significant effort and configuration
+- Some applications don't work at all
+
+Proton (used by Steam) is a maintained fork of Wine focused on gaming and has significantly better compatibility for games than Wine alone.
+
+Running Windows software under Wine or Proton is a workaround, not a guarantee. Check [WineHQ's AppDB](https://appdb.winehq.org/) for reports on specific applications.
+
+---
+
+### Can I use Microsoft Office on Linux?
+
+The Microsoft 365 web apps (Word, Excel, PowerPoint, Outlook) work in any browser on Linux. They're functional for most tasks but lack some features of the desktop apps.
+
+There is no native Microsoft Office desktop client for Linux.
+
+LibreOffice is a capable alternative for many workflows, but the two suites are different applications. Complex documents with macros, advanced formatting, or collaborative tracked changes may not translate perfectly.
+
+---
+
+### Can I use Photoshop on Linux?
+
+Not natively, and not reliably via Wine. Photoshop is a genuine gap in Linux software.
+
+Alternatives exist:
+- **GIMP** — capable photo and image editing, but a different tool with a different interface
+- **Krita** — strong for illustration and digital painting
+- **Darktable** — non-destructive raw photo editor (closer to Lightroom than Photoshop)
+
+If your work requires Photoshop specifically — particularly for professional workflows involving clients, file handoffs, or specific plugin ecosystems — this is a real blocker.
+
+---
+
+### Will my games work on Linux?
+
+Many do; some don't. Steam's Proton compatibility layer has made a large portion of the Steam catalog playable on Linux.
+
+The most significant blocker is kernel-level anti-cheat software. Games like Valorant and Fortnite do not run on Linux.
+
+Check [ProtonDB](https://www.protondb.com/) for your specific games before switching.
+
+---
+
+## The Switch Itself
+
+### Should I dual boot or do a full switch?
+
+If you're uncertain, dual boot first. It lets you use Linux as your daily driver while keeping Windows available for anything that doesn't work.
+
+The downside is that having Windows available makes it easy to fall back on it out of habit rather than genuinely testing Linux. Some people find that committing fully accelerates the learning process.
+
+For most people making a serious evaluation: dual boot first.
+
+---
+
+### How long does it take to feel comfortable on Linux?
+
+It varies, but most people report that basic daily use feels natural within a few weeks. Deeper familiarity — understanding the package manager, being comfortable in the terminal, knowing how to troubleshoot — tends to develop over a few months of regular use.
+
+Going in with patience and a willingness to look things up makes a significant difference.
+
+---
+
+### Where do I ask for help?
+
+- [r/linux4noobs](https://www.reddit.com/r/linux4noobs/) — beginner-friendly Reddit community
+- [r/linuxquestions](https://www.reddit.com/r/linuxquestions/) — broader Linux help community
+- Your distribution's official forum (Ubuntu Forums, Fedora Discussion, etc.)
+- [Arch Wiki](https://wiki.archlinux.org/) — comprehensive Linux reference useful on any distribution
+- [Ask Ubuntu](https://askubuntu.com/) — Stack Exchange site for Ubuntu users
+
+When asking for help, include: your distribution and version, the hardware involved, what you tried, and the exact error message you received. This makes it much easier for people to help you.
+
+---
+
+<Aside type="tip" title="Still unsure?">
+Read [Before You Switch](/before-you-switch/) carefully. If none of the blockers listed there apply to you, the odds are good that Linux will work for your situation. If some do apply, you now know what to investigate further.
+</Aside>
