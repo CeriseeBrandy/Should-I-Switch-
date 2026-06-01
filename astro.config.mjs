@@ -2,23 +2,49 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-// https://astro.build/config
 export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'ShouldISwitch',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+			customCss: ['./src/styles/custom.css'],
+
+			defaultLocale: 'root',
+			locales: {
+				root: {
+					label: 'English',
+					lang: 'en',
+				},
+				fr: {
+					label: 'Français',
+					lang: 'fr',
+				},
+				es: {
+					label: 'Español',
+					lang: 'es',
+				},
+				de: {
+					label: 'Deutsch',
+					lang: 'de',
+				},
+			},
+
+			social: [
+				{
+					icon: 'github',
+					label: 'GitHub',
+					href: 'https://github.com/CeriseeBrandy/Should-I-Switch-',
+				},
+			],
+
 			sidebar: [
 				{
-					label: 'Guides',
+					label: 'Start Here',
 					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
+						{
+							label: 'What is Linux?',
+							slug: 'start-here/what-is-linux',
+						},
 					],
-				},
-				{
-					label: 'Reference',
-					items: [{ autogenerate: { directory: 'reference' } }],
 				},
 			],
 		}),
